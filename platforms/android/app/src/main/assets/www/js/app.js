@@ -1,4 +1,84 @@
 $( document ).ready(function() {
+    // -- TESTING DATABASE ---
+    var db = null;
+
+    window.sqlitePlugin.echoTest(function() {
+        console.log('ECHO test OK');
+    });
+
+    window.sqlitePlugin.selfTest(function() {
+        console.log('SELF test OK');
+    });    
+
+    db = (window.cordova.platformId === 'browser') ?
+        window.openDatabase('MyDatabase', '1.0', 'Data', 2*1024*1024) :
+        window.sqlitePlugin.openDatabase({name: 'MyDatabase.db', location: 'default'});
+
+    db = window.sqlitePlugin.openDatabase({
+        name: 'my.db',
+        location: 'default',
+    });
+
+    db.transaction(function(tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DemoTable (name, score)');
+        tx.executeSql('INSERT INTO DemoTable VALUES (?,?)', ['Alice', 101]);
+        tx.executeSql('INSERT INTO DemoTable VALUES (?,?)', ['Betty', 202]);
+      }, function(error) {
+        console.log('Transaction ERROR: ' + error.message);
+      }, function() {
+        console.log('Populated database OK');
+    });    
+
+    var myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+    myDB.transaction(function(transaction) {
+        transaction.executeSql('CREATE TABLE IF NOT EXISTS codesundar (id integer primary key, title text, desc text)', [],
+        function(tx, result) {
+            alert("Table created successfully");
+        },
+        function(error) {
+            alert("Error occurred while creating the table.");
+        });
+    });
+
+    var title="sundaravel";
+    var desc="phonegap freelancer";
+
+    myDB.transaction(function(transaction) {
+    var executeQuery = "INSERT INTO codesundar (title, desc) VALUES (?,?)";
+    transaction.executeSql(executeQuery, [title,desc]
+        , function(tx, result) {
+        alert('Inserted');
+    },
+        function(error){
+            alert('Error occurred');
+        });
+    });
+
+    myDB.transaction(function(transaction) {
+        transaction.executeSql('SELECT * FROM codesundar', [], function (tx, results) {
+        var len = results.rows.length, i;
+        $("#rowCount").append(len);
+        for (i = 0; i < len; i++){
+            $("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td></tr>");
+        }
+        }, null);
+    }); 
+
+    var id=1;
+    var title="jerry.peter";
+    var desc="diganti datanya";
+    myDB.transaction(function(transaction) {
+    var executeQuery = "UPDATE codesundar SET title=?, desc=? WHERE id=?";
+    transaction.executeSql(executeQuery, [title,desc,id],
+        //On Success
+        function(tx, result) {alert('Updated successfully');},
+        //On Error
+        function(error){alert('Something went Wrong');});
+    });    
+    
+    
+    //-- END TESTING DATABASE
+
     $("#cmdLogin").on("click",function(e) {
 
         var _username = $("#username").val();
@@ -21,30 +101,7 @@ $( document ).ready(function() {
             console.log(data);
             if (data.code == 1) {
                 alert ("Return data : " + data.user[0]["name"]); 
-                alert ("Return data : " + data.employee[0]["employee_name"]); 
-                
-                //---- Simpan data ke local DB 
-                var db = openDatabase('userInfo', '1.0', 'Database User Information', 2 * 1024 * 1024);  
-
-                db.transaction(function (tx) {   
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS (id unique, log)'); 
-                    tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "foobar")'); 
-                    tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "logmsg")'); 
-                });
-
-                db.transaction(function (tx) { 
-                    tx.executeSql('SELECT * FROM LOGS', [], function (tx, results) { 
-                       var len = results.rows.length, i; 
-                       msg = "<p>Found rows: " + len + "</p>"; 
-                       // document.querySelector('#status').innerHTML +=  msg; 
-                   
-                       for (i = 0; i < len; i++) { 
-                          alert(results.rows.item(i).log ); 
-                       } 
-                   
-                    }, null); 
-                 });    
-                 // -- END SIMPAN KEDALAM DATABASE            
+                alert ("Return data : " + data.employee[0]["employee_name"]);           
 
                 $(location).attr('href', 'dashboard.html');       					    
             } else {
