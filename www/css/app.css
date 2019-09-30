@@ -1,0 +1,10 @@
+.rounded-circle
+{
+    border-radius: 50% !important;
+}
+
+.shadow,
+.card-profile-image img
+{
+    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15) !important;
+}

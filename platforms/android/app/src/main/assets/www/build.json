@@ -1,0 +1,14 @@
+
+Login
+{
+    "android":{
+        "release": {
+            "keystore":"app-key.keystore",
+            "storePassword":"qwerty99",
+            "alias":"app-key",
+            "password":"qwerty99",
+            "keystoreType":""
+            
+        }
+    }
+}

@@ -79,7 +79,7 @@ $( document ).ready(function() {
     }
 
 
-
+    accountInfo.createDatabase();
     databaseHandler.createDatabase();
 
     function addProduct() {
@@ -108,11 +108,9 @@ $( document ).ready(function() {
         var _username = $("#username").val();
         var _password = $("#password").val();      
         var _key = "INTRANET";  
+        var storage = window.localStorage;
         var _url = "http://api.ciputragroup.com/restserver/dbwebsec/auth";
 
-        Codebase.loader('show', 'bg-gd-dusk');
-        setTimeout(3000);
-        
 
         $.ajax({
         type: 'GET',
@@ -121,16 +119,28 @@ $( document ).ready(function() {
         data: { username : _username, password : _password, CIPDEV_KEY :_key},
         dataType: "json",
         success: function(data) { 
-            Codebase.loader('hide');
+            // Codebase.loader('hide');
             console.log(data);
             if (data.code == 1) {
-                alert ("Return data : " + data.user[0]["name"]); 
-                alert ("Return data : " + data.employee[0]["employee_name"]);           
+                storage.setItem("employee_id", data.employee[0]["employee_id"]);
+                storage.setItem("employee_name", data.employee[0]["employee_name"]);
+                storage.setItem("address", data.employee[0]["address"]);
+                storage.setItem("employee_nik", data.employee[0]["employee_nik"]);
+                storage.setItem("hp_number", data.employee[0]["hp_number"]);
+                storage.setItem("photo", data.employee[0]["photo"]);
+                storage.setItem("sex", data.employee[0]["sex"]);
+                storage.setItem("email_ciputra", data.employee[0]["email_ciputra"]);                
+                storage.setItem("birth_date", data.employee[0]["birth_date"]);
+                storage.setItem("birth_place", data.employee[0]["birth_place"]);
+
+                storage.setItem("First_Name", data.user[0]["First_Name"]);
+                storage.setItem("Last_Name", data.user[0]["Last_Name"]);                
+                storage.setItem("intranet_id", data.user[0]["intranet_id"]);
+                storage.setItem("user_id_ces", data.user[0]["user_id_ces"]);                
 
                 $(location).attr('href', 'dashboard.html');       					    
-            } else {
-                
-                alert ("Login Failed : [ " + data.message + " ]");       					    
+            } else {                
+                $(location).attr('href', 'login_failed.html');         					    
             }
         }
         });              

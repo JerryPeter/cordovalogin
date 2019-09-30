@@ -29,14 +29,17 @@
         <!-- Fonts and Codebase framework -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
         <link rel="stylesheet" id="css-main" href="assets/css/codebase.min.css">
+        <link rel="stylesheet" id="css-main" href="css/app.css">
+
 
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
         <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
         <!-- END Stylesheets -->
-
         <!-- JS Local -->
-        <script src="js/jquery-3.4.1.js"></script> 
-        <script src="js/dashboard.js"></script>          
+        <script src="js/jquery-3.4.1.js"></script>
+        <script src="js/db.js"></script>  
+        <script src="js/dashboard.js"></script>  
+      
     </head>
     <body>
         <!-- Page Container -->
@@ -196,19 +199,21 @@
             <main id="main-container">
 
                 <!-- Hero -->
-                <div class="bg-gd-dusk">
+                <div class="bg-gd-lake">
                     <div class="bg-black-op-25">
-                        <div class="content content-top content-full text-center">
-                            <div class="mb-20">
-                                <a class="img-link" href="be_pages_ecom_customer.html">
-                                    <img class="img-avatar img-avatar-thumb" src="assets/media/avatars/avatar15.jpg" alt="">
+                        <div class="content content-top content-full text-center">                           
+                            <div class="card-profile-image">				
+                                <a href="#">        				  
+                                    <img                                   
+                                    src="https://ces.ciputragroup.com/webapps/Ciputra/public/app/hrd/library/timthumb/timthumb.php?src=https://ces.ciputragroup.com/webapps/Ciputra/public/app/hrd/uploads/personal/foto/personal_1_1_0861_1496054912.jpg&h=150&w=150&zc=1" 
+                                    class="rounded-circle img-link" id="pp">
                                 </a>
-                            </div>
+                            </div>                            
                             <h1 class="h3 text-white font-w700 mb-10">
-                                John Smith <i class="fa fa-star text-warning"></i>
+                                <div id="employee_name"></div> 
                             </h1>
                             <h2 class="h5 text-white-op">
-                                Premium Member with <a class="text-primary-light link-effect" href="javascript:void(0)">39 Orders</a>
+                                <div class="text-primary-light link-effect" id="employee_nik"></div>
                             </h2>
                         </div>
                     </div>
@@ -217,28 +222,175 @@
                                 
                 <!-- Page Content -->
                 <div class="content">
-                    <div class="block">
-                        <div class="block-header block-header-default">
-                            <h3 class="block-title">Blank <small>Get Started</small></h3>
+                    <!-- EMPLOYEE SELF SERVICE ----->
+                    <div class="block pull-r-l">
+                        <div class="block-header bg-body-light">
+                            <h3 class="block-title"><i class="fa fa-fw fa-user-o font-size-default mr-5"></i>Layanan Kepegawaian</h3>
                             <div class="block-options">
-                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
-                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
-                                    <i class="si si-pin"></i>
-                                </button>
                                 <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
                                     <i class="si si-refresh"></i>
                                 </button>
                                 <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
-                                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="close">
-                                    <i class="si si-close"></i>
-                                </button>
                             </div>
                         </div>
                         <div class="block-content">
-                            <p>Create your own awesome project!</p>
+                            <!-- MENU ICON ----->
+                            <!-- Simple Icon Tiles -->
+                            <div class="row gutters-tiny">
+                                <div class="col-6 col-md-4 col-xl-2">
+                                    <a class="block block-link-shadow text-center" href="cuti.html">
+                                        <div class="block-content">
+                                            <p class="mt-5">
+                                                <i class="si si-clock fa-4x text-elegance"></i>
+                                            </p>
+                                            <p class="font-w600">Pengajuan Ijin</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6 col-md-4 col-xl-2">
+                                    <a class="block block-link-shadow text-center" href="cuti.html">
+                                        <div class="block-content">
+                                            <p class="mt-5">
+                                                <i class="si si-calendar fa-4x text-elegance"></i>
+                                            </p>
+                                            <p class="font-w600">Pengajuan Cuti</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6 col-md-4 col-xl-2">
+                                    <a class="block block-link-shadow text-center" href="cuti.html">
+                                        <div class="block-content">
+                                            <p class="mt-5">
+                                                <i class="si si-rocket fa-4x text-elegance"></i>
+                                            </p>
+                                            <p class="font-w600">Tugas Luar Kantor</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6 col-md-4 col-xl-2">
+                                    <a class="block block-link-shadow text-center" href="cuti.html">
+                                        <div class="block-content">
+                                            <p class="mt-5">
+                                                <i class="si si-docs fa-4x text-elegance"></i>
+                                            </p>
+                                            <p class="font-w600">Lupa Absensi</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6 col-md-4 col-xl-2">
+                                    <a class="block block-link-shadow text-center" href="cuti.html">
+                                        <div class="block-content">
+                                            <p class="mt-5">
+                                                <i class="si si-layers fa-4x text-elegance"></i>
+                                            </p>
+                                            <p class="font-w600">Lembur</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6 col-md-4 col-xl-2">
+                                        <a class="block block-link-shadow text-center" href="cuti.html">
+                                            <div class="block-content">
+                                                <p class="mt-5">
+                                                    <i class="si si-wallet fa-4x text-elegance"></i>
+                                                </p>
+                                                <p class="font-w600">Pay Later</p>
+                                            </div>
+                                        </a>
+                                    </div>                                                
+                            </div>
+                            <!-- END Simple Icon Tiles -->                
+                            <!-- END MENU ICON-->   
                         </div>
                     </div>
+                    <!-- END EMPLOYEE SELF SERVICE ----->                           
+ 
+                    <!-- EMPLOYEE SELF SERVICE ----->
+                    <div class="block pull-r-l">
+                            <div class="block-header bg-body-light">
+                                <h3 class="block-title"><i class="fa fa-fw fa-list-alt font-size-default mr-5"></i>Persetujuan</h3>
+                                <div class="block-options">
+                                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                        <i class="si si-refresh"></i>
+                                    </button>
+                                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                                </div>
+                            </div>
+                            <div class="block-content">
+                                <!-- MENU ICON ----->
+                                <!-- Simple Icon Tiles -->
+                                <div class="row gutters-tiny">
+                                    <div class="col-6 col-md-4 col-xl-2">
+                                        <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                            <div class="block-content block-content-full ribbon ribbon-success">
+                                                <div class="ribbon-box">81</div>
+                                                <p class="mt-5">
+                                                    <i class="si si-clock fa-4x"></i>
+                                                </p>
+                                                <p class="font-w600">IZIN</p>
+                                            </div>                                            
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-xl-2">
+                                        <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                            <div class="block-content block-content-full ribbon ribbon-success">
+                                                <div class="ribbon-box">123</div>
+                                                <p class="mt-5">
+                                                    <i class="si si-calendar fa-4x"></i>
+                                                </p>
+                                                <p class="font-w600">CUTI</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-xl-2">
+                                        <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                            <div class="block-content block-content-full ribbon ribbon-success">
+                                                <div class="ribbon-box">27</div>
+                                                <p class="mt-5">
+                                                    <i class="si si-rocket fa-4x"></i>
+                                                </p>
+                                                <p class="font-w600">TUGAS LUAR KANTOR</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-xl-2">
+                                        <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                            <div class="block-content">
+                                                <p class="mt-5">
+                                                    <i class="si si-docs fa-4x"></i>
+                                                </p>
+                                                <p class="font-w600">ABSENSI</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-xl-2">
+                                        <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                            <div class="block-content">
+                                                <p class="mt-5">
+                                                    <i class="si si-layers fa-4x"></i>
+                                                </p>
+                                                <p class="font-w600">LEMBUR</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-4 col-xl-2">
+                                            <a class="block block-link-shadow text-center" href="javascript:void(0)">
+                                                <div class="block-content">
+                                                    <p class="mt-5">
+                                                        <i class="si si-wallet fa-4x"></i>
+                                                    </p>
+                                                    <p class="font-w600">PAY LATER</p>
+                                                </div>
+                                            </a>
+                                        </div>                                                
+                                </div>
+                                <!-- END Simple Icon Tiles -->                
+                                <!-- END MENU ICON-->   
+                            </div>
+                        </div>
+                        <!-- END EMPLOYEE SELF SERVICE ----->                         
                 </div>
+
+
                 <!-- END Page Content -->
             </main>
             <!-- END Main Container -->
@@ -255,6 +407,7 @@
         <script src="assets/js/codebase.core.min.js"></script>
         <script src="assets/js/codebase.app.min.js"></script>
 
+  
       
     </body>
 </html>
